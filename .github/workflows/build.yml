@@ -44,19 +44,25 @@ jobs:
             qt_version: "6.10"
 
           # ─── macOS Intel (macos-13 dihapus Des 2025 → macos-15-intel) ─
-          - runs_on: macos-15-intel
+          - runs_on: macos-14-intel
+            platform: mac
+            arch: x64
+            cmake_arch: x86_64
+            qt_arch: clang_64
+            qt_version: "5.15"
+          - runs_on: macos-14-intel
             platform: mac
             arch: x64
             cmake_arch: x86_64
             qt_arch: clang_64
             qt_version: "6.5"
-          - runs_on: macos-15-intel
+          - runs_on: macos-14-intel
             platform: mac
             arch: x64
             cmake_arch: x86_64
             qt_arch: clang_64
             qt_version: "6.8"
-          - runs_on: macos-15-intel
+          - runs_on: macos-14-intel
             platform: mac
             arch: x64
             cmake_arch: x86_64
@@ -187,7 +193,7 @@ jobs:
       # upload-artifact v4.6.2 adalah Latest — tidak ada v5 — warning tidak bisa dihindari
       - name: Upload Windows zip Package
         if: matrix.platform == 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: NotepadNext-Windows-Qt${{ matrix.qt_version }}-Zip
           path: build/package/
@@ -243,7 +249,7 @@ jobs:
             --draft
 
       - name: Download all artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
 
       - name: Upload Windows Installer
         shell: bash
@@ -288,7 +294,7 @@ jobs:
   # ─── Debug Job ─────────────────────────────────────────────────────────
   debug-mac-runner:
     if: github.event_name == 'workflow_dispatch'
-    runs-on: macos-15-intel
+    runs-on: macos-14-intel
     steps:
       - name: Debug runner info
         shell: bash
