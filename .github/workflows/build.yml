@@ -95,7 +95,7 @@ jobs:
       # FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true sudah menangani runtime-nya
       - name: Install Qt (mac)
         if: matrix.platform == 'mac'
-        uses: jurplel/install-qt-action@v4
+        uses: jurplel/install-qt-action@v4.3.0
         with:
           version: ${{ matrix.qt_version }}
           host: mac
@@ -106,7 +106,7 @@ jobs:
 
       - name: Install Qt (linux/windows)
         if: matrix.platform != 'mac'
-        uses: jurplel/install-qt-action@v4
+        uses: jurplel/install-qt-action@v4.3.0
         with:
           version: ${{ matrix.qt_version }}
           modules: 'qt5compat'
@@ -195,7 +195,7 @@ jobs:
 
       - name: Upload Windows Installer
         if: matrix.platform == 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: NotepadNext-Windows-Qt${{ matrix.qt_version }}-Installer
           path: installer/NotepadNext*.exe
@@ -203,7 +203,7 @@ jobs:
 
       - name: Upload MacOS dmg
         if: matrix.platform == 'mac'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: NotepadNext-macOS-${{ matrix.arch }}-Qt${{ matrix.qt_version }}
           path: build/NotepadNext*.dmg
@@ -211,7 +211,7 @@ jobs:
 
       - name: Upload Linux AppImage
         if: matrix.platform == 'linux'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: NotepadNext-Linux-Qt${{ matrix.qt_version }}-AppImage
           path: build/NotepadNext*.AppImage
@@ -243,7 +243,7 @@ jobs:
             --draft
 
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
 
       - name: Upload Windows Installer
         shell: bash
